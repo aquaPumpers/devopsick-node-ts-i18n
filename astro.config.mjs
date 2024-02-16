@@ -19,7 +19,7 @@ import partytown from '@astrojs/partytown'
 import { remarkReadingTime } from './src/utils/readTime.ts'
 
 const sitemapLocales = Object.fromEntries(locales.map((_, i) => [locales[i], locales[i]])) // Create an object with keys and values based on locales
-
+import node from '@astrojs/node';
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
