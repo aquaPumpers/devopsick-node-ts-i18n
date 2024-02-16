@@ -15,7 +15,7 @@
     "start": "astro check --watch & astro dev --verbose",
     "format": "prettier -w . --cache",
     "astro": "astro",
-    "build": "bunx --bun astro build",
+    "build": "astro build",
     "sharp": "cd node_modules/sharp && bun install && cd ../../",
     "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\""
   },
