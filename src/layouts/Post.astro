@@ -3,29 +3,65 @@ import Byline from '@components/Byline.astro'
 import PostTags from '@components/PostTags.astro'
 import MainI18n from '@components/MainI18n.astro'
 import type { CollectionEntry } from 'astro:content'
-
+import Layout from './Layout.astro'
+import { Badge } from "@components/ui/badge";
+import { buttonVariants } from "@components/ui/button";
+import { cn } from "@lib/utils";
+import { Icon } from "astro-icon";
+import { Image } from "astro:assets";
+import {mdxComponent} from '@components/content/mdx-components'
 type Props = CollectionEntry<'blog'>['data']
 
 const frontmatter = Astro.props,
-  { title, pubDate, updatedDate, previewImage, tags, author } = Astro.props,
+  { title, pubDate, updatedDate, previewImage, tags, author, category } = Astro.props,
   realTags: string[] = tags.filter((tag) => {
     return tag !== 'other'
   })
 ---
 
+<Layout>
 <MainI18n {frontmatter} collection="blog">
   <main id="main" tabindex="”1”">
-    <article>
+    <div class="relative container max-w-screen-md py-10">
+      <a
+        href="/blog"
+        class={cn(
+          buttonVariants({ variant: "ghost" }),
+          "absolute left-[-200px] top-10 hidden xl:inline-flex text-muted-foreground"
+        )}
+        transition:animate="slide"
+      >
+        <Icon name="lucide:chevron-left" class="mr-2 size-4" />
+         See all posts
+      </a>
+    <article class="prose dark:prose-invert max-w-none">
+      <Badge
+      radius="md"
+      className="capitalize"
+      transition:name={"category-"}
+    >
+      {category}
+    </Badge>
       <header>
         {
           previewImage && (
-            <img width={1020} height={510} src={previewImage} alt="" />
+          <Image
+        class="rounded-xl overflow-hidden my-6"
+        width={1020}
+        height={510}
+        src={previewImage}
+        alt=""
+        transition:name={"img-"}
+      />
           )
         }
-        <h1>{title}</h1>
+        <h1 class="font-heading text-4xl my-4" transition:name={"post-title"}>{title}</h1>
         <Byline authorFullName={author} {pubDate} {updatedDate} />
-        <div class="prose">
-          <slot />
+        <hr class="my-6" />
+        <div>
+          <mdxComponent>
+            <slot />
+          </mdxComponent>
         </div>
         {
           realTags.length > 0 && (
@@ -36,5 +72,6 @@ const frontmatter = Astro.props,
         }
       </header>
     </article>
-  </main></MainI18n
->
+  </main>
+  </MainI18n>
+</Layout>

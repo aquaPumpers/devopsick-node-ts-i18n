@@ -8,7 +8,7 @@ interface Props {
 
 const
 	{ translationLinks } = Astro.props,
-	pageTranslationsAvailableIn = `${uiStrings.pageTranslationsAvailableIn[ Astro.currentLocale]} `;
+	pageTranslationsAvailableIn = `${uiStrings['pageTranslationsAvailableIn'][ Astro.currentLocale]} `;
 ---
 { pageTranslationsAvailableIn &&
 	<p>

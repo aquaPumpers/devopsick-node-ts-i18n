@@ -3,6 +3,7 @@ import Page from '@layouts/Page.astro'
 import { getPostsByTag } from '@utilities/tags'
 import { getRelativePostPath } from '@utilities/getPostPath'
 import type { CommonFrontmatter } from '@src/types'
+import Layout from './Layout.astro'
 
 interface Frontmatter extends CommonFrontmatter {
   tag?: string
@@ -19,7 +20,7 @@ const filteredPosts = await getPostsByTag(
   Astro.currentLocale,
 )
 ---
-
+<Layout>
 <Page {frontmatter}>
   <ul>
     {
@@ -39,3 +40,4 @@ const filteredPosts = await getPostsByTag(
     }
   </ul>
 </Page>
+</Layout>

@@ -70,11 +70,30 @@
 
 @layer base {
   @font-face {
-    font-family: 'CalSans Semibold';
-    src: url('/fonts/calsans-semibold.woff2') format('woff2');
+    font-family: 'Inter';
+    src: url('/fonts/inter.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
+  }
+  @font-face {
+    font-family: Manrope;
+    src: url(../assets/fonts/Manrope-SemiBold.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: Manrope;
+    src: url(../assets/fonts/Manrope-Medium.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: Manrope;
+    src: url(../assets/fonts/Manrope-Light.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: Manrope;
+    src: url(../assets/fonts/Manrope-Regular.woff2) format('woff2');
   }
 
   * {

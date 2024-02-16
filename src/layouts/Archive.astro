@@ -4,6 +4,9 @@ import MainI18n from '@components/MainI18n.astro'
 import FormattedDate from '@components/FormattedDate.astro'
 import { getRelativePostPath } from '@utilities/getPostPath'
 import { getPostDescription } from '@utilities/getPageDescription'
+import BlogHeader from "@components/blog-header.astro";
+import Blockquote from '@components/typography/Blockquote.astro'
+import { Badge } from '@components/ui/badge'
 
 const { frontmatter } = Astro.props,
   title = frontmatter.title,
@@ -18,32 +21,51 @@ const posts = await getPublishedPosts(Astro.currentLocale, collection)
       <h1>{title}</h1>
       <slot />
     </header>
-    <ul>
+    <section class="container py-10">
+      <BlogHeader title="Blog" />
+  
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-9 md:gap-y-11 lg:gap-y-16 lg:gap-x-8"
+      >
+ 
       {
         posts.map((post) => (
-          <li>
+        <article class="group space-y-4">
             <a
+              class="flex h-52 group-hover:-translate-y-2 group-hover:shadow-xl transition duration-300"
               href={`${getRelativePostPath(Astro.currentLocale, collection, post.slug)}`}
             >
               <img
-                width={720}
-                height={360}
+                class="w-full h-full object-cover rounded-xl overflow-hidden"
+                width={400}
+                height={200}
                 src={post.data.previewImage}
-                alt=""
-              />
-              <h2 class="title">{post.data.title}</h2>
-              <p class="date">
+                alt="descriptive text"
+                transition:name={"img-" + post.slug}
+              /></a>
+              <a
+              href={`${getRelativePostPath(Astro.currentLocale, collection, post.slug)}`}>
+              <h2 class="font-heading font-bold text-xl md:text-2xl leading-snug line-clamp-3" transition:name={"title-" + post.slug} >{post.data.title}</h2>
+              </a>
+              <div class="flex items-center justify-between">
+              <a href={`/blog/category/${post.data.category}`}>
+              <Badge
+        radius="md"
+        className="capitalize"
+        transition:name={"category-" + post.slug}
+      >
+        {post.data.category}
+      </Badge>
+    </a>
+              <span class="font-medium text-muted-foreground">
                 <FormattedDate date={post.data.pubDate} />
-              </p>
-            </a>
-            <blockquote
-              cite={`${getRelativePostPath(Astro.currentLocale, collection, post.slug)}`}
-            >
-              {getPostDescription(post)}
-            </blockquote>
-          </li>
+              </span>
+              </div>
+          </article>
         ))
       }
-    </ul>
+
+      </div>
+    </section>
   </main>
 </MainI18n>

@@ -46,11 +46,11 @@ if (reference) {
         )
       })
       .filter((page) => {
-        return getLocaleFromUrl(page.url) !== Astro.currentLocale
+        return getLocaleFromUrl(page['url']) !== Astro.currentLocale
       })
     for (const translation of translationsAvailable) {
-      const locale = getLocaleFromUrl(translation.url),
-        relativeURL = translation.url || '/',
+      const locale = getLocaleFromUrl(translation['url']),
+        relativeURL = translation['url'] || '/',
         absoluteURL = `${site}${relativeURL}`
       const link = {
         absoluteURL: absoluteURL,

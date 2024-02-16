@@ -3,6 +3,7 @@ import { getUniqueTags } from '@utilities/tags'
 import { getTagPath } from '@utilities/tags'
 import Page from '@layouts/Page.astro'
 import type { CommonFrontmatter } from '@src/types'
+import Layout from './Layout.astro'
 
 interface Frontmatter extends CommonFrontmatter {
   collection: string
@@ -19,7 +20,7 @@ const tags = (
   return tag.slugified !== 'other'
 })
 ---
-
+<Layout>
 <Page {frontmatter}>
   <slot />
   <ul>
@@ -32,3 +33,4 @@ const tags = (
     }
   </ul>
 </Page>
+</Layout>

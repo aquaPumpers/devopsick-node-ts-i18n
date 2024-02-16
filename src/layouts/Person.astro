@@ -2,6 +2,7 @@
 import Page from '@layouts/Page.astro'
 import type { Person } from '@utilities/people'
 import type { CommonFrontmatter } from '@src/types'
+import Layout from './Layout.astro'
 export interface PersonFrontmatter extends CommonFrontmatter {
   person: Person
 }
@@ -13,6 +14,7 @@ const person = frontmatter.person
 const contactDataAreAvailable = person.mail || person.mastodon
 ---
 
+<Layout>
 <Page {frontmatter}>
   {
     contactDataAreAvailable && (
@@ -41,3 +43,4 @@ const contactDataAreAvailable = person.mail || person.mastodon
 
   <p>{person.description[Astro.currentLocale]}</p>
 </Page>
+</Layout>
