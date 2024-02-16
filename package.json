@@ -1,0 +1,52 @@
+{
+  "name": "devopsick",
+  "description": "My Website with locales",
+  "repository": "https://github.com/Frikadellios/devopsick",
+  "author": "Hrihorii Ilin <devopsick@pm.me>",
+  "license": "Apache-2.0",
+  "type": "module",
+  "version": "1.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.5.4",
+    "@astrojs/mdx": "^2.1.1",
+    "@astrojs/react": "^3.0.10",
+    "@astrojs/rss": "^4.0.5",
+    "@astrojs/sitemap": "^3.0.5",
+    "@astrojs/tailwind": "^5.1.0",
+    "@sindresorhus/slugify": "^2.2.1",
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "astro": "^4.4.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "date-fns": "^3.3.1",
+    "github-slugger": "^2.0.0",
+    "lucide-react": "^0.331.0",
+    "markdown-it": "^14.0.0",
+    "mdast-util-toc": "^7.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rehype-external-links": "^3.0.0",
+    "remark": "^15.0.1",
+    "remove-markdown": "^0.5.0",
+    "sanitize-html": "^2.11.0",
+    "tailwind-merge": "^2.2.1",
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^13.0.7",
+    "@types/remove-markdown": "^0.3.4",
+    "@types/sanitize-html": "^2.9.5",
+    "@types/bun": "^1.0.5"
+  }
+}
