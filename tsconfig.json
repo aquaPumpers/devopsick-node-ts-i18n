@@ -13,6 +13,7 @@
       "@src/*": ["src/*"],
       "@utilities/*": ["src/utilities/*"],
       "@lib/*": ["src/lib/*"],
+      "@assets/*": ["src/assets/*"],
     }
   }
 }

@@ -2,6 +2,7 @@
 import { siteTitle, siteThemeColor } from '@src/consts';
 import DescriptionMeta from './DescriptionMeta.astro';
 import type { CommonFrontmatter } from '@src/types';
+import { ViewTransitions } from 'astro:transitions'
 
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
@@ -18,12 +19,28 @@ const
 	title = frontmatter.title ? `${frontmatter.title} | ${siteTitle}` : siteTitle,
 	description =  frontmatter.description,
 	file =  frontmatter.file,
-	previewImage =  frontmatter.previewImage || '/blog-placeholder-1.jpg',
+	previewImage =  frontmatter.previewImage || '/og.jpg',
 	canonicalURL = new URL(frontmatter.canonicalURL || Astro.url.pathname, Astro.site),
-	faviconIco 			= mode === 'development' ? '/favicon-dev.ico' : '/favicon.ico',
-	faviconSVG 			= mode === 'development' ? '/favicon-dev.svg' : '/favicon.svg',
-	appleTouchIcon	= mode === 'development' ? '/apple-touch-icon-dev.png' : '/apple-touch-icon.png';
+	faviconIco 			= mode === 'development' ? '/favicon.ico' : '/favicon.ico',
+	faviconSVG 			= mode === 'development' ? '/favicon.svg' : '/favicon.svg',
+	appleTouchIcon	= mode === 'development' ? '/apple-touch-icon-dev.jpg' : '/apple-touch-icon.jpg';
 ---
+
+<!-- Google tag (gtag.js) -->
+<script
+  type="text/partytown"
+  async
+  src="https://www.googletagmanager.com/ns.html?id=GTM-T7CDGRPZ"></script>
+<script type="text/partytown">
+  window.dataLayer = window.dataLayer || []
+  function gtag() {
+    dataLayer.push(arguments)
+  }
+  gtag('js', new Date())
+
+  gtag('config', 'GTM-T7CDGRPZ')
+</script>
+
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
@@ -74,3 +91,118 @@ const
 	<meta property="twitter:description" content={description} />
 }
 <meta property="twitter:image" content={new URL(previewImage, Astro.url)} />
+
+<link
+  rel="preload"
+  href="/fonts/calsans-semibold.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/Manrope-SemiBold.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+
+<link
+  rel="preload"
+  href="/fonts/Manrope-Bold.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+
+<link
+  rel="preload"
+  href="/fonts/Manrope-ExtraBold.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+
+<link
+  rel="preload"
+  href="/fonts/Manrope-ExtraLight.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+
+<link
+  rel="preload"
+  href="/fonts/Manrope-Light.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+
+<link
+  rel="preload"
+  href="/fonts/Manrope-Medium.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+
+<link
+  rel="preload"
+  href="/fonts/Manrope-Regular.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<!-- Font preloads -->
+<link
+  rel="preload"
+  href="/fonts/inter.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<script is:inline>
+	const setDarkMode = () => {
+	  const theme = (() => {
+		if (
+		  typeof localStorage !== 'undefined' &&
+		  localStorage.getItem('theme')
+		) {
+		  return localStorage.getItem('theme')
+		}
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+		  return 'dark'
+		}
+		return 'light'
+	  })()
+  
+	  if (theme === 'light') {
+		document.documentElement.classList.remove('dark')
+	  } else {
+		document.documentElement.classList.add('dark')
+	  }
+	  window.localStorage.setItem('theme', theme)
+	}
+  
+	setDarkMode()
+	document.addEventListener('astro:after-swap', setDarkMode)
+  </script>
+  
+  <!-- Google Tag Manager -->
+  <script>
+	;(function (w, d, s, l, i) {
+	  w[l] = w[l] || []
+	  w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+	  var f = d.getElementsByTagName(s)[0],
+		j = d.createElement(s),
+		dl = l != 'dataLayer' ? '&l=' + l : ''
+	  j.async = true
+	  j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+	  f.parentNode.insertBefore(j, f)
+	})(window, document, 'script', 'dataLayer', 'GTM-T7CDGRPZ')
+  </script>
+  <!-- End Google Tag Manager -->
+  
+  <!-- Astro Page Transitions -->
+  <ViewTransitions />

@@ -6,6 +6,8 @@ import tailwind from "@astrojs/tailwind";
 import rehypeExternalLinks from 'rehype-external-links'
 import { defaultLocale, locales } from './src/i18n/i18n';
 import { site } from './src/consts';
+import partytown from '@astrojs/partytown';
+import million from "million/compiler";
 
 const sitemapLocales = Object.fromEntries(locales.map((_, i) => [locales[i], locales[i]])) // Create an object with keys and values based on locales
 
@@ -16,7 +18,8 @@ export default defineConfig({
 	site: site,
 	integrations: [
 		mdx(),
-    react(), 
+    react(),
+	partytown(), 
     tailwind({
     applyBaseStyles: false,
   }),
@@ -32,6 +35,18 @@ export default defineConfig({
 		defaultLocale: defaultLocale,
 		locales: locales,
 	},
+	vite: {
+		plugins: [
+		  million.vite({
+			mode: "react",
+			server: true,
+			auto: {
+			  threshold: 0.05,
+			  skip: ["useBadHook", /badVariable/g],
+			},
+		  }),
+		],
+	  },
 	markdown: {
 		rehypePlugins:[[
 			rehypeExternalLinks, {
