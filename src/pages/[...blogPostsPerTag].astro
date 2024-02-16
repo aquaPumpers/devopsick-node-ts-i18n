@@ -35,6 +35,7 @@ export async function getStaticPaths() {
   }
   return allPostsPerTagPages
 }
+export const prerender = true;
 ---
 
 <PostsPerTag frontmatter={Astro.props} />
