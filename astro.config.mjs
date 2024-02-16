@@ -13,7 +13,7 @@ import million from 'million/compiler'
 import yaml from '@rollup/plugin-yaml'
 import { rehypeHeadingIds } from "@astrojs/markdown-remark"
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import vercel from '@astrojs/vercel/static';
+import vercel from '@astrojs/vercel/serverless';
 
 import partytown from '@astrojs/partytown'
 import { remarkReadingTime } from './src/utils/readTime.ts'
@@ -25,6 +25,13 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
 	site: site,
+	output: 'server',
+    adapter: vercel({
+		webAnalytics: {
+			enabled: true,
+		  },
+		imageService: true,
+	  }),
 	image: {
 		service: 
 		passthroughImageService(),
