@@ -25,13 +25,6 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
 	site: site,
-	output: 'static',
-    adapter: vercel({
-		webAnalytics: {
-			enabled: true,
-		  },
-		imageService: true,
-	  }),
 	image: {
 		service: 
 		passthroughImageService(),
