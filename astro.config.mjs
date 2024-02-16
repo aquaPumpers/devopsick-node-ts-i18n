@@ -8,6 +8,14 @@ import { defaultLocale, locales } from './src/i18n/i18n';
 import { site } from './src/consts';
 import partytown from '@astrojs/partytown';
 import million from "million/compiler";
+import astroExpressiveCode from 'astro-expressive-code'
+import million from 'million/compiler'
+import yaml from '@rollup/plugin-yaml'
+import { rehypeHeadingIds } from "@astrojs/markdown-remark"
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+
+import partytown from '@astrojs/partytown'
+import { remarkReadingTime } from './src/utils/readTime.ts'
 
 const sitemapLocales = Object.fromEntries(locales.map((_, i) => [locales[i], locales[i]])) // Create an object with keys and values based on locales
 
@@ -17,12 +25,23 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
 	site: site,
 	integrations: [
-		mdx(),
-    react(),
-	partytown(), 
-    tailwind({
-    applyBaseStyles: false,
-  }),
+		astroExpressiveCode({
+			themes: ['material-theme-palenight', 'material-theme-palenight'],
+			shiki: {},
+		  }),
+		  mdx({
+			syntaxHighlight: 'shiki',
+			shikiConfig: {
+			  theme: 'material-theme-palenight',
+			  wrap: true,
+			},
+			drafts: true,
+		  }),
+    	react(),
+		partytown(), 
+    	tailwind({
+    		applyBaseStyles: false,
+  		}),
 		sitemap({
 			filter: (page) => page.secret !== true,
 			i18n: {
@@ -45,14 +64,24 @@ export default defineConfig({
 			  skip: ["useBadHook", /badVariable/g],
 			},
 		  }),
+		  yaml(),
 		],
 	  },
-	markdown: {
+	  prefetch: {
+		prefetchAll: true
+	  },
+	  markdown: {
 		rehypePlugins:[[
 			rehypeExternalLinks, {
 				target: '_blank',
 				rel: ['nofollow', 'noreferrer'],
 			}
-		]]
+		]],
+		remarkPlugins: [remarkReadingTime],
+		drafts: true,
+		shikiConfig: {
+		  theme: 'material-theme-palenight',
+		  wrap: true,
+		},
 	}
 });

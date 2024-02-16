@@ -1,34 +1,37 @@
 ---
-import { defaultLocale, fallback } from '@i18n/i18n';
-import HeaderLink from './HeaderLink.astro';
-import { headerMenu } from '@src/header';
-import type { navigationItem } from '@src/header';
-import { ThemeToggle } from "@components/theme-toggle"
+import { defaultLocale, fallback } from '@i18n/i18n'
+import HeaderLink from './HeaderLink.astro'
+import { headerMenu } from '@src/header'
+import type { navigationItem } from '@src/header'
+import { ThemeToggle } from '@components/theme-toggle'
 
-const menuLocale: string =  headerMenu[Astro.currentLocale] ? Astro.currentLocale : fallback[Astro.currentLocale] || defaultLocale
+const menuLocale: string = headerMenu[Astro.currentLocale]
+  ? Astro.currentLocale
+  : fallback[Astro.currentLocale] || defaultLocale
 const headerMenuItems: navigationItem[] = headerMenu[menuLocale].items
-
 ---
 
 <header>
-	<nav>
-		<ThemeToggle client:load />
-		<slot />
-		<ul class="header__list">
-			{headerMenuItems.map((item) => (
-				<HeaderLink href={item.path}>{item.label}</HeaderLink>
-			))}
-		</ul>
-	</nav>
+  <nav>
+    <ThemeToggle client:load />
+    <slot />
+    <ul class="header__list">
+      {
+        headerMenuItems.map((item) => (
+          <HeaderLink href={item.path}>{item.label}</HeaderLink>
+        ))
+      }
+    </ul>
+  </nav>
 </header>
 
 <style>
-	.header__list{
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		gap: 1em;
-		max-width: 100%;
-		overflow-x: auto;
-	}
+  .header__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+    max-width: 100%;
+    overflow-x: auto;
+  }
 </style>

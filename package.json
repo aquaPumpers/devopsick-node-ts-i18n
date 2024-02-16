@@ -7,20 +7,29 @@
   "type": "module",
   "version": "1.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "postbuild": "pagefind --site dist",
+    "format:check": "prettier --plugin-search-dir=. --check .",
+    "formats": "prettier --plugin-search-dir=. --write .",
+    "syncyarn": "bun bun.lockb",
+    "dev": "astro dev --watch",
+    "start": "astro check --watch & astro dev --verbose",
+    "format": "prettier -w . --cache",
+    "astro": "astro",
+    "build": "bunx --bun astro build",
+    "sharp": "cd node_modules/sharp && bun install && cd ../../",
+    "lint": "prettier --write  \"**/*.{js,jsx,ts,tsx,md,mdx,astro}\" && eslint --fix \"src/**/*.{js,ts,jsx,tsx,astro}\""
   },
   "dependencies": {
     "@astrojs/check": "^0.5.4",
     "@astrojs/mdx": "^2.1.1",
+    "@astrojs/markdown-remark": "^4.2.1",
     "@astrojs/partytown": "^2.0.4",
     "@astrojs/react": "^3.0.10",
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.0.5",
     "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/ts-plugin": "^1.5.2",
     "@hookform/resolvers": "^3.3.4",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
@@ -53,6 +62,8 @@
     "@tanstack/react-table": "^8.12.0",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
+    "@fontsource/inter": "^5.0.16",
+    "@pagefind/default-ui": "^1.0.3",
     "astro": "^4.4.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -63,7 +74,6 @@
     "github-slugger": "^2.0.0",
     "lucide-react": "^0.331.0",
     "markdown-it": "^14.0.0",
-    "mdast-util-toc": "^7.0.0",
     "million": "^3.0.3",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
@@ -81,12 +91,48 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.3.3",
     "vaul": "^0.9.0",
+    "@rollup/plugin-yaml": "^4.1.2",
+    "astro-expressive-code": "latest",
+    "astro-icon": "^0.8.2",
+    "balance-text": "^3.3.1",
+    "lint-staged": "15.2.2",
+    "motion": "^10.16.4",
+    "pagefind": "^1.0.3",
+    "reading-time": "^1.5.0",
+    "rehype-autolink-headings": "^7.1.0",
+    "sharp": "^0.32.5",
+    "tsm": "^2.3.0",
     "zod": "^3.22.4"
   },
+  "overrides": {
+    "astro-expressive-code": "latest"
+  },
+  "lint-staged": {
+    "*.{astro,js,jsx,ts,tsx,md,mdx,json}": [
+      "prettier --write --plugin-search-dir=."
+    ]
+  },
   "devDependencies": {
+    "@types/bun": "latest",
+    "@typescript-eslint/parser": "^7.0.1",
     "@types/markdown-it": "^13.0.7",
     "@types/remove-markdown": "^0.3.4",
     "@types/sanitize-html": "^2.9.5",
-    "@types/bun": "^1.0.5"
-  }
+    "eslint": "^8.56.0",
+    "eslint-plugin-astro": "0.31.4",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "prettier": "^3.2.4",
+    "bun-types": "^1.0.26",
+    "unist-util-visit": "^5.0.0",
+    "prettier-config-standard": "^7.0.0",
+    "prettier-plugin-astro": "0.13.0",
+    "prettier-plugin-tailwindcss": "^0.5.11",
+    "mdast-util-from-markdown": "^2.0.0",
+    "mdast-util-to-markdown": "^2.1.0",
+    "mdast-util-to-string": "^4.0.0",
+    "mdast-util-toc": "^7.0.0"
+  },
+  "trustedDependencies": [
+    "sharp"
+  ]
 }

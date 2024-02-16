@@ -4,7 +4,7 @@ author: 'Hrihorii Ilin'
 description: 'This is my description'
 pubDate: 'Jul 15 2022'
 previewImage: '/blog-placeholder-2.jpg'
-tags: 
+tags:
   - markdown
 reference: third-post
 ---
@@ -191,12 +191,12 @@ Mixed list:
 Mixed list:
 
 1. Fruit
-    - Apple
-    - Orange
-    - Banana
+   - Apple
+   - Orange
+   - Banana
 2. Dairy
-    - Milk
-    - Cheese
+   - Milk
+   - Cheese
 ```
 
 #### Output
@@ -222,12 +222,12 @@ Mixed list:
 Mixed list:
 
 1. Fruit
-    - Apple
-    - Orange
-    - Banana
+   - Apple
+   - Orange
+   - Banana
 2. Dairy
-    - Milk
-    - Cheese
+   - Milk
+   - Cheese
 
 ## Other Elements — abbr, sub, sup, kbd, mark
 

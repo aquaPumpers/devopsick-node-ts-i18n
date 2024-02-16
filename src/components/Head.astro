@@ -1,29 +1,34 @@
 ---
-import { siteTitle, siteThemeColor } from '@src/consts';
-import DescriptionMeta from './DescriptionMeta.astro';
-import type { CommonFrontmatter } from '@src/types';
+import { siteTitle, siteThemeColor } from '@src/consts'
+import DescriptionMeta from './DescriptionMeta.astro'
+import type { CommonFrontmatter } from '@src/types'
 import { ViewTransitions } from 'astro:transitions'
 
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-import '../styles/globals.css';
+import '../styles/globals.css'
 
 interface Props {
-	frontmatter: CommonFrontmatter,
-	includeCanonicalMeta?: boolean
+  frontmatter: CommonFrontmatter
+  includeCanonicalMeta?: boolean
 }
 
-const
-	mode = import.meta.env.MODE,
-	{frontmatter, includeCanonicalMeta = true} = Astro.props,
-	title = frontmatter.title ? `${frontmatter.title} | ${siteTitle}` : siteTitle,
-	description =  frontmatter.description,
-	file =  frontmatter.file,
-	previewImage =  frontmatter.previewImage || '/og.jpg',
-	canonicalURL = new URL(frontmatter.canonicalURL || Astro.url.pathname, Astro.site),
-	faviconIco 			= mode === 'development' ? '/favicon.ico' : '/favicon.ico',
-	faviconSVG 			= mode === 'development' ? '/favicon.svg' : '/favicon.svg',
-	appleTouchIcon	= mode === 'development' ? '/apple-touch-icon-dev.jpg' : '/apple-touch-icon.jpg';
+const mode = import.meta.env.MODE,
+  { frontmatter, includeCanonicalMeta = true } = Astro.props,
+  title = frontmatter.title ? `${frontmatter.title} | ${siteTitle}` : siteTitle,
+  description = frontmatter.description,
+  file = frontmatter.file,
+  previewImage = frontmatter.previewImage || '/og.jpg',
+  canonicalURL = new URL(
+    frontmatter.canonicalURL || Astro.url.pathname,
+    Astro.site,
+  ),
+  faviconIco = mode === 'development' ? '/favicon.ico' : '/favicon.ico',
+  faviconSVG = mode === 'development' ? '/favicon.svg' : '/favicon.svg',
+  appleTouchIcon =
+    mode === 'development'
+      ? '/apple-touch-icon-dev.jpg'
+      : '/apple-touch-icon.jpg'
 ---
 
 <!-- Google tag (gtag.js) -->
@@ -41,19 +46,16 @@ const
   gtag('config', 'GTM-T7CDGRPZ')
 </script>
 
-
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Favicons based on https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs -->
-<link rel="icon" href={faviconIco} sizes="32x32">
-<link rel="icon" href={faviconSVG} type="image/svg+xml">
-<link rel="apple-touch-icon" href={appleTouchIcon}>
-<link rel="manifest" href="/manifest.webmanifest">
-
-
+<link rel="icon" href={faviconIco} sizes="32x32" />
+<link rel="icon" href={faviconSVG} type="image/svg+xml" />
+<link rel="apple-touch-icon" href={appleTouchIcon} />
+<link rel="manifest" href="/manifest.webmanifest" />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
@@ -62,34 +64,28 @@ const
 <DescriptionMeta {description} {file} />
 
 <!-- Canonical URL and translations-->
-{includeCanonicalMeta &&
-	<link rel="canonical" href={canonicalURL} />
-}
-<slot/>
+{includeCanonicalMeta && <link rel="canonical" href={canonicalURL} />}
+<slot />
 
- <link rel="sitemap" href="/sitemap-index.xml" />
- 
+<link rel="sitemap" href="/sitemap-index.xml" />
+
 <!-- Theme color -->
-<meta name="theme-color" content={siteThemeColor}>
-<meta name="msapplication-navbutton-color" content={siteThemeColor}>
-<meta name="apple-mobile-web-app-status-bar-style" content={siteThemeColor}>
+<meta name="theme-color" content={siteThemeColor} />
+<meta name="msapplication-navbutton-color" content={siteThemeColor} />
+<meta name="apple-mobile-web-app-status-bar-style" content={siteThemeColor} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
-{description &&
-	<meta property="og:description" content={description} />
-}
+{description && <meta property="og:description" content={description} />}
 <meta property="og:image" content={new URL(previewImage, Astro.url)} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
-{description &&
-	<meta property="twitter:description" content={description} />
-}
+{description && <meta property="twitter:description" content={description} />}
 <meta property="twitter:image" content={new URL(previewImage, Astro.url)} />
 
 <link
@@ -163,46 +159,46 @@ const
   crossorigin
 />
 <script is:inline>
-	const setDarkMode = () => {
-	  const theme = (() => {
-		if (
-		  typeof localStorage !== 'undefined' &&
-		  localStorage.getItem('theme')
-		) {
-		  return localStorage.getItem('theme')
-		}
-		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-		  return 'dark'
-		}
-		return 'light'
-	  })()
-  
-	  if (theme === 'light') {
-		document.documentElement.classList.remove('dark')
-	  } else {
-		document.documentElement.classList.add('dark')
-	  }
-	  window.localStorage.setItem('theme', theme)
-	}
-  
-	setDarkMode()
-	document.addEventListener('astro:after-swap', setDarkMode)
-  </script>
-  
-  <!-- Google Tag Manager -->
-  <script>
-	;(function (w, d, s, l, i) {
-	  w[l] = w[l] || []
-	  w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
-	  var f = d.getElementsByTagName(s)[0],
-		j = d.createElement(s),
-		dl = l != 'dataLayer' ? '&l=' + l : ''
-	  j.async = true
-	  j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
-	  f.parentNode.insertBefore(j, f)
-	})(window, document, 'script', 'dataLayer', 'GTM-T7CDGRPZ')
-  </script>
-  <!-- End Google Tag Manager -->
-  
-  <!-- Astro Page Transitions -->
-  <ViewTransitions />
+  const setDarkMode = () => {
+    const theme = (() => {
+      if (
+        typeof localStorage !== 'undefined' &&
+        localStorage.getItem('theme')
+      ) {
+        return localStorage.getItem('theme')
+      }
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark'
+      }
+      return 'light'
+    })()
+
+    if (theme === 'light') {
+      document.documentElement.classList.remove('dark')
+    } else {
+      document.documentElement.classList.add('dark')
+    }
+    window.localStorage.setItem('theme', theme)
+  }
+
+  setDarkMode()
+  document.addEventListener('astro:after-swap', setDarkMode)
+</script>
+
+<!-- Google Tag Manager -->
+<script>
+  ;(function (w, d, s, l, i) {
+    w[l] = w[l] || []
+    w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' })
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != 'dataLayer' ? '&l=' + l : ''
+    j.async = true
+    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
+    f.parentNode.insertBefore(j, f)
+  })(window, document, 'script', 'dataLayer', 'GTM-T7CDGRPZ')
+</script>
+<!-- End Google Tag Manager -->
+
+<!-- Astro Page Transitions -->
+<ViewTransitions />
