@@ -15,32 +15,32 @@ const contactDataAreAvailable = person.mail || person.mastodon
 ---
 
 <Layout>
-<Page {frontmatter}>
-  {
-    contactDataAreAvailable && (
-      <table>
-        <tr>
-          {person.mail && (
-            <tr>
-              <td>Mail</td>
-              <td>
-                <a href={`mailto:${person.mail}`}>{person.mail}</a>
-              </td>
-            </tr>
-          )}
-          {person.mastodon && (
-            <tr>
-              <td>Mastodon</td>
-              <td>
-                <a href={`https://${person.mastodon}`}>{person.mastodon}</a>
-              </td>
-            </tr>
-          )}
-        </tr>
-      </table>
-    )
-  }
+  <Page {frontmatter}>
+    {
+      contactDataAreAvailable && (
+        <table>
+          <tr>
+            {person.mail && (
+              <tr>
+                <td>Mail</td>
+                <td>
+                  <a href={`mailto:${person.mail}`}>{person.mail}</a>
+                </td>
+              </tr>
+            )}
+            {person.mastodon && (
+              <tr>
+                <td>Mastodon</td>
+                <td>
+                  <a href={`https://${person.mastodon}`}>{person.mastodon}</a>
+                </td>
+              </tr>
+            )}
+          </tr>
+        </table>
+      )
+    }
 
-  <p>{person.description[Astro.currentLocale]}</p>
-</Page>
+    <p>{person.description[Astro.currentLocale]}</p>
+  </Page>
 </Layout>

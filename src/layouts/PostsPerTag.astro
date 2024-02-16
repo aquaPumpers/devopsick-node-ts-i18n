@@ -20,24 +20,25 @@ const filteredPosts = await getPostsByTag(
   Astro.currentLocale,
 )
 ---
+
 <Layout>
-<Page {frontmatter}>
-  <ul>
-    {
-      filteredPosts.map(({ data, slug }) => (
-        <li>
-          <a
-            href={getRelativePostPath(
-              Astro.currentLocale,
-              frontmatter.collection,
-              slug,
-            )}
-          >
-            {data.title}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-</Page>
+  <Page {frontmatter}>
+    <ul>
+      {
+        filteredPosts.map(({ data, slug }) => (
+          <li>
+            <a
+              href={getRelativePostPath(
+                Astro.currentLocale,
+                frontmatter.collection,
+                slug,
+              )}
+            >
+              {data.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </Page>
 </Layout>
