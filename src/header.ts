@@ -40,6 +40,54 @@ export const headerMenu: Record<string, Record<string, navigationItem[]>> = {
       },
     ],
   },
+  fr: {
+    items: [
+      {
+        path: '/fr/',
+        label: 'Home',
+      },
+      {
+        path: '/fr/blog',
+        label: 'Blog',
+      },
+      {
+        path: '/fr/thema',
+        label: 'Themen',
+      },
+    ],
+  },
+  de: {
+    items: [
+      {
+        path: '/de/',
+        label: 'Home',
+      },
+      {
+        path: '/de/blog',
+        label: 'Blog',
+      },
+      {
+        path: '/de/thema',
+        label: 'Themen',
+      },
+    ],
+  },
+  es: {
+    items: [
+      {
+        path: '/es/',
+        label: 'Home',
+      },
+      {
+        path: '/es/blog',
+        label: 'Blog',
+      },
+      {
+        path: '/es/thema',
+        label: 'Themen',
+      },
+    ],
+  },
   ru: {
     items: [
       {

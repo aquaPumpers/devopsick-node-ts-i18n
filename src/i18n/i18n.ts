@@ -1,4 +1,4 @@
-export type Locale = 'en' | 'ru' | 'uk' | string
+export type Locale = 'en' | 'ru' | 'uk' | 'es' | 'de' | 'fr'; 
 
 interface Fallback {
   [key: string]: string
@@ -10,7 +10,7 @@ type PathNames = {
 }
 
 export const defaultLocale: string = 'en'
-export const locales = ['en', 'ru', 'uk']
+export const locales = ['en', 'ru', 'uk', 'fr', 'es', 'de']
 export const fallback: Fallback = {
   ru: 'en',
 }
@@ -20,6 +20,9 @@ export const collectionDirectoryNames: PathNames = {
     en: 'blog',
     uk: 'blog',
     ru: 'blog',
+    fr: 'blog',
+    es: 'blog',
+    de: 'blog'
   },
 }
 export const directoryNames: PathNames = {
@@ -28,11 +31,17 @@ export const directoryNames: PathNames = {
     en: 'tag',
     uk: 'thema',
     ru: 'onderwerp',
+    fr: 'tags',
+    es: 'tags',
+    de: 'tags'
   },
   // Define the path for people's profile pages. Should arguably be the same as the locale's About page's slug.
   people: {
     en: 'about',
     uk: 'ueber',
     ru: 'over',
+    fr: 'about',
+    es: 'about',
+    de: 'about'
   },
 }
