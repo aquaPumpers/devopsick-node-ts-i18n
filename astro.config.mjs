@@ -8,7 +8,6 @@ import { defaultLocale, locales } from './src/i18n/i18n';
 import { site } from './src/consts';
 import partytown from '@astrojs/partytown';
 import million from "million/compiler";
-import astroExpressiveCode from 'astro-expressive-code'
 import million from 'million/compiler'
 import yaml from '@rollup/plugin-yaml'
 import { rehypeHeadingIds } from "@astrojs/markdown-remark"
@@ -37,10 +36,6 @@ export default defineConfig({
 		passthroughImageService(),
 	  },
 	integrations: [
-		astroExpressiveCode({
-			themes: ['material-theme-palenight', 'material-theme-palenight'],
-			shiki: {},
-		  }),
 		  mdx({
 			syntaxHighlight: 'shiki',
 			shikiConfig: {
